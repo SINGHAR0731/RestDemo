@@ -11,6 +11,9 @@ public class RandomNumberService {
 	private final Random random = new Random();
 
 	public Integer getRandomValue (Integer value) {
+		if (value <= MIN_VALUE) { // Stop -ive value;
+			return MIN_VALUE;
+		}
 		return random.nextInt((value - MIN_VALUE) + 1) + MIN_VALUE;
 	}
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.objenesis.instantiator.sun.MagicInstantiator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -41,6 +42,13 @@ public class RestDemoApplicationTests {
     @Test (expected = RestClientException.class)
     public void getRandomNumberWithWrongValue() throws Exception {
     	 this.restTemplate.getForObject("http://localhost:" + port + "/random/number?value=\"sdfjksd\"", Integer.class);
+    }
+    
+    @Test
+    public void getRandomNumberForZero() {
+        Integer number = this.restTemplate.getForObject("http://localhost:" + port + "/random/number?value=0",Integer.class);
+        assertTrue(number==MIN_VALUE);	
+    	
     }
 
 }
